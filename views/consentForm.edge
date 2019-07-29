@@ -1,0 +1,106 @@
+@layout('layouts.app')
+
+@section('content')
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Consent Form</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+
+
+      <!-- <textarea class="form-control" id="consentContent" rows="3" name ="consentContent" ></textarea> -->
+      <h5 align="center">Carnegie Mellon University</h5>
+<h5 align="center">Informed Consent to Participate in Research</h5>
+<br>
+<h5 align="center">Study title: Human Agent Interaction Research</h5>
+
+<h6 align="center">Researcher[s]: Dick Dunning, PhD Fellow, Engineering and Public Policy</h6>
+<br>
+We’re inviting you to participate in a research study. Participation is completely voluntary. If you agree to participate, you can always change your mind and withdraw. There are no negative consequences, whatever you decide.
+<br>
+<br>
+What is the purpose of this study?
+<br>
+We want to understand on the dynamics of human agent interaction on the appropriate reliance on a neural network in decision making.
+
+<br>
+<br>
+What will I do?
+<br>
+This survey will require you to play an online game with an agent team mate against an agent opponent. If your choice of move does not match with your agent’s decision, you can choose either to stick to your choice or listen to your agent’s recommendation. 
+<br>
+<br>
+Risks 
+<br>
+• Amazon could link your worker ID (and associated personal information) with your survey responses. Make sure you have read Amazon’s MTurk participant and privacy agreements to understand how your personal information may be used or disclosed.
+<br>
+<br>
+Possible benefits: It will help us better understand human agent interaction.
+<br>
+<br>
+Estimated number of participants: 200 participants
+<br>
+<br>
+How long will it take? 
+• There will be 30 games in total which takes approximately 2 hours. 
+<br>
+<br>
+Costs: None 
+<br>
+<br>
+Compensation: $10 Amazon gift card – or – 1 hour extra credit 
+<br>
+<br>
+Future research: 
+<br>
+De-identified data (all identifying information removed) may be shared with other researchers. You won’t be told specific details about these future research studies. 
+<br>
+<br>
+Funding source: CMU is funding this research study.
+<br>
+Confidentiality and Data Security
+We won’t collect your identifying information for the research. 
+
+<br>
+<br>
+Contact information:
+For questions about the research, complaints, or problems: Contact: rdunning@andrew.cmu.edu
+
+<br>
+<br>
+Agreement to Participate
+If you meet the eligibility criteria and would like to participate in this study, click the button below to begin the game. 
+<br>
+<br>
+
+<div align="center">
+    <a >
+      <form action="/play/newGame" method="POST" style="display:inline-block"  >
+            <button class="btn btn-primary" name="decision" value="agreed">I AGREE</button>
+      </form>
+    </a>
+
+   <a >
+      <form action="/" method="GET" style="display:inline-block"  >
+            <button class="btn btn-primary">I DECLINE</button>
+      </form>
+       </a>
+     </div>
+
+
+    </div>
+  </div>
+</div>
+@endsection

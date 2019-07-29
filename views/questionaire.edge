@@ -1,0 +1,290 @@
+@layout('layouts.app')
+
+@section('content')
+
+<!-- <link rel="stylesheet" href="/css/q.css"> -->
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/contact-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h1>Questionaire</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      @if(errors.length > 0)
+        <ul class="list-group">
+          @each(error in errors)
+            <li class="list-group-item text-danger">{{ error }}</li>
+          @endeach
+        </ul>
+      @endif
+
+      <form action="/newQuestionaire" method="POST" encType="application/json">
+        <!-- <div class="form-group floating-label-form-group controls">
+            <label>Profession</label>
+            <input type="profession" name="profession" placeholder="" class="form-control">
+          </div>
+            <button class="btn btn-primary">Submit</button> -->
+             <h4>Your background information</h4>
+            <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="yearOfBorn">Year of Born</label>
+        <br>
+        <select name="year" id="year" required="required">
+          <option value ="">---Please choose---</option>
+        </select>  
+ <script type="text/javascript">  
+   window.onload = function() {
+   var date = new Date();  
+   for(var i=1920;i<=date.getFullYear();i++) {  
+      year.options.add(new Option(i, i));             
+   }  
+   }  
+ </script>  
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="educationalBackground">Education Background</label>
+        <select name="educationalBackground" id="educationalBackground" required="required">
+          <option value ="">---Please choose---</option>
+        <option value ="Some High School">Some High School</option>
+        <option value ="High School">High School</option>
+        <option value="Some College">Some College</option>
+        <option value="Bachelor">Bachelor</option>
+        <option value="Master">Master</option>
+        <option value="Phd">Phd</option>
+      </select>
+      </div>
+    </div>
+
+
+<div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="TypeOfEducation">Type Of Education</label>
+        <select name="TypeOfEducation" id="TypeOfEducation" required="required">
+          <option value ="">---Please choose---</option>
+        <option value ="Liberal Arts">Liberal Arts</option>
+        <option value ="Science">Science</option>
+        <option value="Engineering">Engineering</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="Technology">Technology</option>
+        <option value="Business">Business</option>
+      </select>
+      </div>
+
+    <div class="form-group">
+      <label for="AIMLGE">AI/ML Game Experience</label>
+      <br>
+      <select name="AIMLGE" id="AIMLGE" required="required">
+        <option value ="">---Please choose---</option>
+        <option value ="1">Never played</option>
+        <option value ="2">Have played once or twice</option>
+        <option value="3">played sometimes</option>
+        <option value="4">played frequently</option>
+        <option value="5">I am a professional</option>
+        </select>
+    </div>
+    </div>
+
+<div class="form-row">
+      <div class="form-group">
+      <label for="tech">Use of technology</label>
+      <br>
+      <select name="tech" id="tech" required="required">
+        <option value ="">---Please choose---</option>
+        <option value ="1">Seldom used tech</option>
+        <option value ="2">sometimes used tech</option>
+        <option value="3">often used tech</option>
+        <option value="4">used tech everyday</option>
+        <option value="5">I am a tech professional</option>
+        </select>
+    </div>
+
+      <div class="form-group">
+      <label for="profession">Profession</label>
+      <br>
+      <select name="profession" id="profession" required="required">
+        <option value ="">---Please choose---</option>
+        <option value ="1">Legal Occupations</option>
+        <option value ="2">Healthcare Practitioners and Technical Occupations</option>
+        <option value="3">Community and Social Service Occupations</option>
+        <option value="4">Management Occupations</option>
+        <option value="5">Healthcare Support Occupations</option>
+        <option value ="6">Farming, Fishing, and Forestry Occupations</option>
+        <option value ="7">Construction and Extraction Occupations</option>
+        <option value="8">Protective Service Occupations</option>
+        <option value="9">Food Preparation and Serving Related Occupations</option>
+        <option value="10">Production Occupations</option>
+        <option value ="11">Life ,Physical, and Social Science Occupations</option>
+        <option value ="12">Business and Financial Operations Occupations</option>
+        <option value="13">Architecture and Engineering Occupations</option>
+        <option value="14">Builidng and Frounds Cleaning and Maintenance Occupations</option>
+        <option value="15">Sales and related Occupations</option>
+        <option value ="16">Education and Training Occupations</option>
+        <option value ="17">Computer and Mathematical Occupations</option>
+        <option value="18">Installation, Maintenance and Repair Occupations</option>
+        <option value="19">Office and Administrative Support Occupations</option>
+        <option value="20">Arts, Design, Entertainment, Sports, and Media Occupations</option>
+        <option value="21">Personal Care and Service Occupations</option>
+        <option value="22">Transportation and Materials Moving Occupations</option>
+        </select>
+    </div>
+
+</div>
+
+    <h4>Evaluate Yellow(your) Agent</h4>
+
+    <div class="form-row">
+    <div class="form-group">
+        <label for="Competence">Competence(i.e. to what extent does the algorithm perform its function properly?).</label>
+        <br>
+        <select name ="Competence" id="Competence" required="required">
+           <option value ="">---Please choose---</option>
+        <option value ="1">Very Negative</option>
+        <option value ="2">Somewhat Negative</option>
+        <option value="3">Neutral</option>
+        <option value="4">Somewhat Positive</option>
+        <option value="5">Very Positive</option>
+        </select>
+      </div>
+       </div>
+        <div class="form-row">
+    <div class="form-group">
+        <label for="Predictability">Predictability(i.e. to what extent can the algorithm’s behavior be predicted from moment to moment?)</label>
+        <br>
+        <select name="Predictability" id="Predictability" required="required">
+           <option value ="">---Please choose---</option>
+        <option value ="1">Very Negative</option>
+        <option value ="2">Somewhat Negative</option>
+        <option value="3">Neutral</option>
+        <option value="4">Somewhat Positive</option>
+        <option value="5">Very Positive</option>
+        </select>
+      </div>
+   </div>
+
+
+
+
+    <div class="form-row">
+       <div class="form-group">
+        <label for="Dependability">Dependability(i.e. to what extent can you count on the algorithm to do its job?)</label>
+        <br>
+        <select name="Dependability" id="Dependability" required="required">
+          <option value ="">---Please choose---</option>
+        <option value ="1">Very Negative</option>
+        <option value ="2">Somewhat Negative</option>
+        <option value="3">Neutral</option>
+        <option value="4">Somewhat Positive</option>
+        <option value="5">Very Positive</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="Reliability">Reliability(i.e. to what extent does the algorithm respond similarly to similar circumstances at different points in time?)</label>
+         <br>
+        <select name ="Reliability" id="Reliability" required="required">
+           <option value ="">---Please choose---</option>
+        <option value ="1">Very Negative</option>
+        <option value ="2">Somewhat Negative</option>
+        <option value="3">Neutral</option>
+        <option value="4">Somewhat Positive</option>
+        <option value="5">Very Positive</option>
+        </select>
+      </div>
+    </div>
+
+<div class="form-row">
+      <div class="form-group">
+        <label for="faith1">Your degree of faith that the algorithm will be able to cope with other system states in the future</label>
+         <br>
+        <select name ="faith1" id="faith1" required="required">
+           <option value ="">---Please choose---</option>
+        <option value ="1">Very Negative</option>
+        <option value ="2">Somewhat Negative</option>
+        <option value="3">Neutral</option>
+        <option value="4">Somewhat Positive</option>
+        <option value="5">Very Positive</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="trust1">Your degree of trust in the algorithm to predict accurately</label>
+         <br>
+        <select name ="trust1" id="trust1" required="required">
+           <option value ="">---Please choose---</option>
+        <option value ="1">Very Negative</option>
+        <option value ="2">Somewhat Negative</option>
+        <option value="3">Neutral</option>
+        <option value="4">Somewhat Positive</option>
+        <option value="5">Very Positive</option>
+        </select>
+      </div>
+    </div>
+
+
+
+<div class="form-row">
+      <div class="form-group">
+        <label for="trust2">Your degree of trust in the algorithm</label>
+         <br>
+        <select name ="trust2" id="trust2" required="required">
+           <option value ="">---Please choose---</option>
+        <option value ="1">Very Negative</option>
+        <option value ="2">Somewhat Negative</option>
+        <option value="3">Neutral</option>
+        <option value="4">Somewhat Positive</option>
+        <option value="5">Very Positive</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="trust3">Your overall degree of trust in the algorithm</label>
+         <br>
+        <select name ="trust3" id="trust3" required="required">
+           <option value ="">---Please choose---</option>
+        <option value ="1">Very Negative</option>
+        <option value ="2">Somewhat Negative</option>
+        <option value="3">Neutral</option>
+        <option value="4">Somewhat Positive</option>
+        <option value="5">Very Positive</option>
+        </select>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Comment</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name ="comments"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" align="center">Submit</button>
+  
+
+  </form>
+      
+
+
+    </div>
+  </div>
+</div>
+@endsection

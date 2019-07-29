@@ -1,0 +1,27 @@
+@layout('layouts.app')
+
+@section('content')
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/robot.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading">
+          <h2>Thank you for playing with us</h2>
+          <h3>Your return code is {{returnCode}}</h3>
+          <!-- <input type="text" id="returnCode" value="Your return code is {{returnCode}}" readonly> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<h1 align="center">Click the button to play the original game</h1>
+    <div align="center">
+      <form action="https://azfour.com/" method="GET" >
+            <button class="btn btn-primary" name="decision" value="agree" >GO TO ORIGINAL GAME</button>
+      </form>
+    </div>
+
+@endsection

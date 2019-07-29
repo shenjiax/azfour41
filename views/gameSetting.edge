@@ -1,0 +1,106 @@
+<!-- choose model and skill -->
+<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>AZFour - Connect Four Powered by the AlphaZero Algorithm</title>
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/gameSetting.css" rel="stylesheet">
+</head>
+<body>
+    <div class="my-2 text-center"> 
+        <h2> The generation and the skill settings of computer and user player will be as below</h2>
+    </div>
+<section class="pricing py-5">
+
+    <form action="/play/newGame" method="POST" accept-charset="utf-8">
+        <div class="container">
+            <div class="row">
+                <!-- computer Model -->
+                <div class="col-lg-3">
+                    <div class="card mb-1 mb-lg-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase text-center">Model(computer)</h5>
+                            <p class="card-price text-center"> the higher the generations setting,<br>the  better the playing ability</p>
+                            <hr>
+                            <ul class="fa-ul">
+                                <input type="radio" name="model_choice_c" value="000001" checked>Generation 1<br>
+                                <input type="radio" name="model_choice_c" value="000003">Generation 3<br>
+                                <input type="radio" name="model_choice_c" value="000005">Generation 5<br>
+                                <input type="radio" name="model_choice_c" value="000007">Generation 7<br>
+                                <input type="radio" name="model_choice_c" value="000020">Generation 20<br>
+                                <input type="radio" name="model_choice_c" value="000050">Generation 50<br>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- computer skill -->
+                <div class="col-lg-3">
+                    <div class="card mb-3 mb-lg-10">
+                        <!-- <div class="card mb-5 col-6 col-sm-3"> -->
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase text-center">Skill(Computer)</h5>
+                            <p class="card-price text-center">the higher the Skill setting,<br>the more Move Choice resembles argmax</p>
+                            <hr>
+                            <ul class="fa-ul">
+                                <input type="radio" name="skill_choice_c" value="1" checked>Skill 1<br>
+                                <input type="radio" name="skill_choice_c" value="2">Skill 2<br>
+                                <input type="radio" name="skill_choice_c" value="3">Skill 3<br>
+                                <input type="radio" name="skill_choice_c" value="4">Skill 4<br>
+                                <input type="radio" name="skill_choice_c" value="5">Skill 5<br>
+                                <input type="radio" name="skill_choice_c" value="6">Skill 6<br>
+                                <input type="radio" name="skill_choice_c" value="7">Skill 7<br>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- user Model -->
+                <div class="col-lg-3">
+                    <div class="card mb-1 mb-lg-0">
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase text-center">Model(User)</h5>
+                            <p class="card-price text-center"> the higher the generations setting,<br>the better the playing ability</p>
+                            <hr>
+                            <ul class="fa-ul">
+                                <input type="radio" name="model_choice_u" value="000001" checked>Generation 1<br>
+                                <input type="radio" name="model_choice_u" value="000003">Generation 3<br>
+                                <input type="radio" name="model_choice_u" value="000005">Generation 5<br>
+                                <input type="radio" name="model_choice_u" value="000007">Generation 7<br>
+                                <input type="radio" name="model_choice_u" value="000020">Generation 20<br>
+                                <input type="radio" name="model_choice_u" value="000050">Generation 50<br>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- user skill -->
+                <div class="col-lg-3">
+                    <div class="card mb-3 mb-lg-10">
+                        <!-- <div class="card mb-5 col-6 col-sm-3"> -->
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase text-center">Skill(User)</h5>
+                            <p class="card-price text-center">the higher the Skill setting,<br>the more Move Choice resembles argmax</p>
+                            <hr>
+                            <ul class="fa-ul">
+                                <input type="radio" name="skill_choice_u" value="1" checked>Skill 1<br>
+                                <input type="radio" name="skill_choice_u" value="2">Skill 2<br>
+                                <input type="radio" name="skill_choice_u" value="3">Skill 3<br>
+                                <input type="radio" name="skill_choice_u" value="4">Skill 4<br>
+                                <input type="radio" name="skill_choice_u" value="5">Skill 5<br>
+                                <input type="radio" name="skill_choice_u" value="6">Skill 6<br>
+                                <input type="radio" name="skill_choice_u" value="7">Skill 7<br>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group text-center">
+            <button class = "btn btn-warning">Submit</button>
+        </div>
+    </form>
+</section>
+<script src="/vendor/jquery/jquery.min.js"></script>
+<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>

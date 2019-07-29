@@ -1,0 +1,387 @@
+body {
+font-family: 'Oxygen';
+transform: scale(1.0);
+transform-origin: 0 0;
+}
+body a {
+font-family: 'Oxygen';
+}
+
+
+.container {
+margin-top: 55px;
+margin-right: auto;
+margin-left: auto;
+margin-bottom: 10px;
+max-width: 960px !important;
+}
+
+footer{
+  width: 960px;
+  height: 300px;
+}
+
+#game-header h1{
+  text-align:center;
+  font-size: 24px;
+  margin-top: 10px;
+}
+.autoplay {
+  margin-left: 10px;
+}
+.autoplay-label {
+  font-weight: normal;
+  line-height: 1.8em;
+  padding: 5px 5px 0px 5px;
+}
+
+input[type=checkbox] {
+  vertical-align: bottom;
+  position: relative;
+  bottom: 7px;
+}
+
+p.info{
+  text-align:center;
+  width:400px;
+  margin:0 auto;
+  font-size:12px;
+  font-weight:bold;
+  color:#666;
+  margin-bottom:20px;
+}
+
+.modal-backdrop {
+  height: 12000px;
+}
+
+#game-header{
+  margin:0 auto;
+  margin-bottom:50px;
+  padding-bottom:5px;
+  border-bottom: 1px solid black;
+}
+
+#game-buttons{
+  margin:0 auto;
+  padding-top: 0px;
+  font-size: 16px;
+}
+
+#evaluation {
+  margin:0 auto;
+  text-align: center;
+  border-bottom: 2px solid #333;
+}
+#result {
+  margin:0 auto;
+  margin-top: 2px;
+  position: relative;
+  text-align: center;
+  font-size: 18pt;
+  font-weight: bold;
+  height: 100px;
+  width: 640px;
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 750px !important;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  #game-buttons{
+  }
+  .container {
+    padding: 0;
+  }
+  #result {
+    height: 50px;
+  }
+}
+
+#game-base{
+  width:640px;  
+  margin:0 auto;
+  padding-top: 0px;
+}
+
+#board {
+  margin:0 auto;
+}
+
+.game-table{
+  background:url("../img/board.svg") 0 0 no-repeat;
+  background-size: 640px 548px;
+  background-origin: content-box;
+  width:640px;
+  height:475px;
+  position:relative;
+  border-radius:10px;
+  background-clip: border-box;
+}
+
+#game-table-back{
+  z-index: -10;
+  left: 3px;
+  margin-bottom: -472px;
+  filter: hue-rotate(20deg) brightness(0.65);
+  border-radius:10px;
+}
+
+#buttons {
+  display:flex;
+  justify-content:center;
+  margin-top:20px;
+}
+
+button {
+  border: 1px solid black;
+  margin: 2px;
+}
+
+#scores {
+  width: 1000px;
+  /*margin:0 auto 10 10;*/
+  margin-top: 10 px;
+  margin-bottom: 10px;
+  margin-left: 0 px;
+  margin-right: 5 px;
+  position: relative;
+
+  padding-left:  0px;
+  padding-right: 0px;
+}
+
+
+
+td > input{
+
+  width:85px;
+  margin-left:6px;
+  margin-bottom: 8px;
+  font-size: 18pt;
+  font-weight: bold;
+  text-align: center;
+  border:solid 1px #000
+
+}
+
+#estimation > div{
+  display: block;
+  text-align: center;
+  font-size: 18pt;
+  font-weight: bold;
+  width: 85px;
+  border:solid 1px #000
+}
+
+#scores > div {
+  display: inline-block;
+  text-align: center;
+  font-size: 18pt;
+  font-weight: bold;
+  width: 85px;
+  border:solid 1px #000
+}
+
+#humanoptions {
+  width: 640px;
+  margin:0 auto;
+  position: relative;
+  padding-left: 10px;
+  padding-right: 0px;
+}
+
+#humanoptions > div {
+  display: inline-block;
+  text-align: center;
+  font-size: 18pt;
+  font-weight: bold;
+  width: 85px;
+}
+
+#rangebarContainer{
+  width: 650px;
+  height:300px;
+}
+
+#confidence {
+  width: 640px;
+  margin:0 auto;
+  position: relative;
+  padding-left: 10px;
+  padding-right: 0px;
+  margin-left: -30px;
+}
+
+#confidence > div {
+  display: inline-block;
+  text-align: center;
+  font-size: 18pt;
+  font-weight: bold;
+  width: 85px;
+}
+
+
+
+
+.disc{
+  position:absolute;
+  z-index:-1;
+  top:-74px;
+  left:14px;
+  width:71px;
+  height:71px;
+  margin-top: 0px;
+  margin-left: 0px;
+  box-sizing: border-box;
+  border-radius:70px;
+  transition-property: top, left;
+  transition-duration: 0.6s, 0.0s;
+}
+
+.disc.red{
+  background:#e00000;
+  border:16px solid #b00000;
+  box-shadow: 2px -2px #800000;
+}
+
+.disc.yellow{
+  background:#f0e000;
+  border:16px solid #b0a000;
+  box-shadow: 2px -2px #807000;
+}
+
+select {
+  border: 1px solid black;
+}
+.select-group {
+  margin-bottom: 10px;
+}
+
+.red-model select {
+  color: black;
+}
+
+.red-model {
+  border: 1px solid #333;
+  background: #e00000;
+  border-radius:10px;
+  padding: 7px;
+  line-height: 1.8em;
+}
+.red-model select, .yellow-model select {
+  font-size: 14.5px;
+  width: 100%;
+}
+
+.yellow-model {
+  border: 1px solid #333;
+  background: #f0e000;
+  border-radius:10px;
+  padding: 7px;
+  line-height: 1.8em;
+}
+
+#spacer {
+  height: 13px;
+}
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+.myslidecontainer {
+    width: 100%; /* Width of the outside container */
+    height:100%; 
+}
+
+/* The slider itself */
+.slider {
+  margin-top: 10px;
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 100%; /* Specified height */
+  background: white; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border-radius:4px;
+  /*-moz-transform: rotate(270deg);*/
+}
+
+
+.myslider {
+  margin-top: 70px;
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 500%; /* Full-width */
+  height: 100%; /* Specified height */
+  background: red; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border-radius:4px;
+   transform: rotate(270deg);
+  /*-moz-transform: rotate(270deg);*/
+}
+
+
+
+
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 18px; /* Set a specific slider handle width */
+  height: 29px; /* Slider handle height */
+  background: #000; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius:4px;
+}
+
+.slider::-moz-range-thumb {
+  width: 18px; /* Set a specific slider handle width */
+  height: 29px; /* Slider handle height */
+  background: #000; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border-radius:4px;
+}
+/*
+.btn-sub{ //这里是左边减按钮的css样式
+            outline: none;
+            border: none;
+            cursor: pointer;
+            background: url("images/minusSign.png");
+            background-size: 100%;
+            width: 1.8rem;
+            height: 1.8rem;
+            margin-top: 60px;
+        }
+*/
+/*.btn-add{ //这里是右边+按钮的css样式
+            outline: none;
+            border: none;
+            cursor: pointer;
+            background: url("images/addSign.png") no-repeat;
+            background-size: 100%;
+            width: 1.8rem;
+            height: 1.8rem;
+            margin-bottom: 10px;
+}*/
+
+
+input[type=range]{
+  display:block;
+  width: 150px;
+}
