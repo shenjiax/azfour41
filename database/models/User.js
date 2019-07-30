@@ -74,7 +74,10 @@ const UserSchema = new mongoose.Schema({
   },
    userIP: {
     type :String,
-  }
+  }, 
+  gameVersion: {
+    type :String,
+  },
 })
 
 UserSchema.statics.changeGamePlayedByUserId = function(gUserId, gOutcome){

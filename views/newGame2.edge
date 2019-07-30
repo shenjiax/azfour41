@@ -17,32 +17,12 @@
   <link href='https://fonts.googleapis.com/css?family=Oxygen' rel=
     'stylesheet'>
   <link rel="stylesheet" href="/css/style.css">
-  <!-- <script src="/js/index.js"></script> -->
-  <style>
-    body {
-      font-family: 'Oxygen';
-      transform: scale(1.0);
-      transform-origin: 0 0;
-    }
-    body a {
-      font-family: 'Oxygen';
-    }
-  </style>
+
 </head>
 
 
 <body>
 
-
-<div class="row" style="margin: 0;">
-  <div class="col-xs-12" id="game-header">
-    <div class="container">
-      <div class="col-xs-8">
-        <h1>AZFour</h1>
-      </div>
-    </div>
-  </div>
-</div>
 <div class="container">
   <script async src="https://static.addtoany.com/menu/page.js"></script>
   <div class="row">
@@ -166,6 +146,9 @@
       </div>
 
 <input type="text" id="gGameIdd" value="{{gGameIdd}}" style="display:none" readonly>
+<input type="text" id="gGameWinnedd" value="{{gGameWinnedd}}"  style="display:none" readonly>
+<input type="text" id="gGameDrawedd" value="{{gGameDrawedd}}"  style="display:none" readonly>
+<input type="text" id="gGameLostd" value="{{gGameLostd}}"  style="display:none" readonly>
 
       <div align="center" class="select-group yellow-model" id="yellow-controls" style="display: none">
         <div class="row">
@@ -207,7 +190,7 @@
         </div>
         <div class="modal-body">
           
-          <div class="container">
+          <div class="container" style="border-top: 0; ">
             <h4>What's your trust of the agent in this game? </h4>
             <p>Please choose a value</p>
  
@@ -219,7 +202,7 @@
 
 </div>
 
-<div class="container">
+<div class="container" style="border-top: 0;">
            <h4>What's your trust of the yourself in this game? </h4>
             <p>Please choose a value</p>
  
@@ -228,12 +211,7 @@
     <label class="radio"><input type="radio" name="yourselfRadio" value="3" >Trust Level 3</label>
      <label class="radio"><input type="radio" name="yourselfRadio" value="4" >Trust Level 4</label>
       <label class="radio"><input type="radio" name="yourselfRadio" value="5" >Trust Level 5</label>
-
 </div>
-
-
-
-
         </div>
 
         <div class="modal-footer" style="border-top: 0; padding: 5px;">
@@ -255,11 +233,15 @@
 
       <div class="modal-content">
         <div class="modal-header" style="border-bottom: 0;">
-          
-          <h3 class="modal-title" id="modal-title-text">Yellow  Wins!!!</h3>
         </div>
         <div class="modal-body">
            <h4>You have finished the game</h4>
+        </div>
+        <div class="modal-footer" style="border-top: 0; padding: 5px;">
+          
+             <Button id="toFinalPage" class="btn btn-success" data-dismiss="modal">OK</Button>
+         
+         
         </div>
       </div>
 

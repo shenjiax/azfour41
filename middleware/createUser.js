@@ -10,6 +10,18 @@ module.exports = (req,res, next)=>{
 		console.log("session no userId");
 		req.session.userId=gUserId;
     req.session.decision="agreed";
+
+    var randomNum = Math.floor(Math.random() * 10);
+    console.log("generated random number : "+randomNum);
+    console.log("final random number : "+randomNum%2);
+    var gameVersion; 
+  if (randomNum%2==0) {
+    gameVersion="newGame";
+  }else{
+    gameVersion="newGame2";
+  }
+    req.session.gameVersion=gameVersion;
+
 		if (!req.session.gamePlayed){
 			req.session.gamePlayed = parseInt(0); 
       req.session.gameWinned = parseInt(0);
@@ -29,7 +41,8 @@ module.exports = (req,res, next)=>{
         gameDrawed: 0,
         gameLost: 0, 
         decision: "agreed",
-        userIP:userIP:req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+        gameVersion: gameVersion,
+        userIP:req.headers['x-forwarded-for'] || req.connection.remoteAddress,
 
 			}, (error, user) => {console.log("error: "+error);
        			 console.log("type of user: "+ typeof user)

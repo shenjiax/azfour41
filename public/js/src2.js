@@ -37,6 +37,9 @@ var gDisableUI = false;
 
 //how many complete games we have rendered now
 var gGameId = 0;
+var gGameWinned = 0; 
+var gGameDrawed = 0; 
+var gGameLost = 0; 
 
 //indicate when the game begins
 var gTimeStamp0;
@@ -162,10 +165,15 @@ $("#newGame1").click(function() {
               });
 });
 
-var gSource;
+
+
+
+
+
+
 
 //fetch the data from remote
-function loadRemote(model, b, token) {
+function loadRemote(model, b) {
     var id = gGameId;
     //two parts, each has 6*7
     var arr = new Float32Array(2 * 6 * 7);
@@ -175,7 +183,7 @@ function loadRemote(model, b, token) {
     //construct 1 part, 2 groups, both have 6 rows and 7 cols
     var nda = ndarray(arr, [1, 2, 6, 7]);
     //fetch data from remote server
-    var req = graphpipe.remote("/api/" + model + "/", nda, "", "", "", {cancelToken: token});
+    var req = graphpipe.remote("/api/" + model + "/", nda, "", "", "");
     return req
 }
 
@@ -395,12 +403,6 @@ function updatePredictions() {
 
     message="looks like a draw";
 
-    //the player color, default is red
-    var pcolor = "red"
-    if (p == 1) {
-      pcolor = "yellow";
-    }
-
     //red thinks yellow's winning percentage 
     ////yellow thinks red's winning percentage
     if (value < -0.05 || value > 0.05) {
@@ -414,36 +416,21 @@ function updatePredictions() {
 
     if (p == 0) {
       // message = "Red <small>(" + $('#ModelSelect1 option:selected').text() + ")</small> thinks:<br/> " + message;
-      message = "Red thinks"+message;
+      message = "Red thinks "+message;
     } else {
-      message = "Yellow thinks"+message;
+      message = "Yellow thinks "+message;
       // message = "Yellow <small>(" + $('#ModelSelect2 option:selected').text() + ")</small> thinks:<br/> " + message;
     }
 
     gPredReady[p+1] = true;
-    console.log(current+"(1 red, 2 yellow)'s prdiction set processing from its model is ready."); 
-
-    //since data from model is back, UI can be active again now
-    gDisableUI = false;
-
-  }).catch(function (error) {
-
-    console.log(current+"(1 red, 2 yellow)'s prdiction set processing from its model is not ready. Error is: "+error);
-    if (error.toString() == "Cancel") {
-      return;
+    if(computerToPlay()){
+      gDisableUI = false;
+    }else{
+      var optimumModel = "000050";
+      return loadRemote(optimumModel, b);
     }
-   
-    //$('#retry-modal').modal('show');
-  });
-
- var optimumModel = "000050";
-
- if(!computerToPlay()){// if not computer we need the optimum policy
-   gDisableUI = true;
-
-  console.log(current+"(1 red, 2 yellow) begins sending data of the current status on board to OPTIMUM MODEL--------->");
-  
-  loadRemote(optimumModel, b).then(function (response) {
+    
+  }).then(function (response) {
 
     console.log("policy distribution and value received from OPTIMUM MODEL for player: "+current+" (1 red, 2 yellow)");
 
@@ -459,17 +446,12 @@ function updatePredictions() {
     //the total win percentage
     optimumPercentage = Math.floor(Math.abs(optimumValue) * 100) + "%";
     optimumMessage="looks like a draw";
-    //the player color
-    var pcolor = "red"
-    if (p == 1) {
-      pcolor = "yellow";
-    }
     //red thinks yellow's winning percentage 
     ////yellow thinks red's winning percentage
-    if (optimumPercentage < -0.05 || optimumPercentage > 0.05) {
+    if (optimumValue < -0.05 || optimumValue > 0.05) {
       color = "red";
       //if red, value<-0.05 || if yellow,value>0.05
-      if ((p == 0 && optimumPercentage < -0.05) || (p == 1 && optimumPercentage > 0.05)) {
+      if ((p == 0 && optimumValue < -0.05) || (p == 1 && optimumValue > 0.05)) {
         color = "yellow";
       }
       optimumMessage = "I am " + optimumPercentage + " confident " + color + " will win";
@@ -499,22 +481,37 @@ function updatePredictions() {
 
 
 
-
-}
-
 //when the page is loaded, this function will be called immediately, i.e entry point
 window.onload = function() {//when we first load this page
   //jQuery http://api.jquery.com/prop/
   //check whether they are all autoplay
   //obtain the Generation Value 
+
+  //when refresh, gGameId and gGameWinned, gGameDrawed, gGameLost are re-populated
+  //preventing any un-committed data messing up database
   gModels[0] = document.getElementById("ModelSelect1").value;
   gModels[1] = document.getElementById("ModelSelect2").value;
   console.log("onload: "+document.getElementById("gGameIdd").value)
   gGameId=parseInt(document.getElementById("gGameIdd").value);
+   console.log("onload:  gGameWinned original: "+gGameWinned);
+   console.log("onload:  gGameWinned zhijiena: "+document.getElementById("gGameWinnedd").value);
+  gGameWinned=parseInt(document.getElementById("gGameWinnedd").value);
+  console.log("onload: after populated: "+gGameWinned);
+
+  gGameDrawed=parseInt(document.getElementById("gGameDrawedd").value);
+  console.log("onload: "+gGameDrawed);
+  gGameLost=parseInt(document.getElementById("gGameLostd").value);
+   console.log("onload: "+gGameLost);
   console.log("onload: "+gGameIdd);
    console.log("onload: "+typeof gGameIdd);
   newGame();
   
+  $('#message-modal2').on('hidden.bs.modal', function (e) {
+  window.setTimeout(function() {
+    $(location).attr('href', '/questionaire');
+  }, 100);
+})
+
 };
 
 
@@ -727,7 +724,13 @@ function dropDisc(disc, col) {
         var color = disc.player == 2 ? 'Yellow' : 'Red';
         gTimeStamp5=new Date();
         gOutcome=color;
-        $("#modal-title-text").html(color + " wins!");
+        if (gOutcome=="Red"){
+          gGameLost++;
+        }else{
+          gGameWinned++;
+        }
+        $("#modal-title-text").html(color + " wins! This is your game "+gGameId+ " You have won "
+          +gGameWinned+" , You have drawed "+ gGameDrawed+" , You have lost "+gGameLost);
 
         $('#message-modal').modal('show');
 
@@ -738,7 +741,10 @@ function dropDisc(disc, col) {
       } else if (checkForTie()) {
         gTimeStamp5=new Date();
         gOutcome="tie"; 
-        $("#modal-title-text").html("It's a tie!");
+        gGameDrawed++;
+        $("#modal-title-text").html("It's a tie! This is your game "+gGameId+ " You have won "
+          +gGameWinned+" , You have drawed "+ gGameDrawed+" , You have lost "+gGameLost);
+
         $('#message-modal').modal('show');
     
         window.scrollTo(0, 0);
@@ -755,9 +761,13 @@ function dropDisc(disc, col) {
         document.getElementById("estBtn").style.display="";
         document.getElementById("estSelectBtn").style.display="none";
         document.getElementById("rangebarContainer").style.display="";
+
         for(var i=0;i<7;i++){
           document.getElementById("e"+i).value = 0;
           document.getElementById("confidence"+i).value = 0;
+
+           //document.getElementById('e' + i).readonly=false;
+          document.getElementById('e' + i).disabled=false;
 
           if (possibleColumns().indexOf(i) == -1){
               console.log(i+" column is full");
@@ -807,20 +817,29 @@ function dropDisc(disc, col) {
               document.getElementById("scores").style.display="";
               document.getElementById("result").style.display="";
               document.getElementById("estimation").style.display="";
+              // document.getElementById("estimation").style.disabled=true;
               document.getElementById("estBtn").style.display="none";
               document.getElementById("estSelectBtn").style.display="";
 
               gTimeStamp3=new Date();
 
               for (var i = 0; i < 7; i++) {//compute every col's win's percentage
-                document.getElementById('s' + i).textContent = adjustedPriors[i]+ "%";
+                document.getElementById('s' + i).textContent = "0";
+                document.getElementById('s' + i).style="color:#fff";
                 //stress the biggest one probability
                 document.getElementById('s'+ adj_max_index).style="background-color:green";
+                document.getElementById('s'+ adj_max_index).textContent="X";
                 document.getElementById('e'+ est_max_index).style="background-color:green";
-                var eId = 'e'+i;
+                //var eId = 'e'+i;
                 //show human estimation value
-                document.getElementById(eId).value = gEstimations[i]+ "%";
-                $('#eId').attr("readonly",true); 
+                
+                document.getElementById('e' + i).value = gEstimations[i]+ "%";
+
+                //document.getElementById('s' + i).readonly=true;
+                document.getElementById('s' + i).disabled=true; 
+                //document.getElementById('e' + i).readonly=true;
+                document.getElementById('e' + i).disabled=true; 
+                //$('#eId').attr("readonly",true); 
               }
               
               document.getElementById("result").innerHTML = message;
@@ -899,8 +918,10 @@ function sendGameData(){
        totalTime: totalTime, 
        humanToAgentTrust: $('input[name="optradio"]:checked').val(), 
        humanToHimselfTrust: $('input[name="yourselfRadio"]:checked').val(),
-       model:gModels[0], 
-       skill:document.getElementById('Skill1').value,
+       redModel:gModels[0], 
+       redSkill:document.getElementById('Skill1').value,
+       yellowModel:gModels[1],
+       yellowSkill: document.getElementById('Skill2').value,
   });
 }
 
@@ -1113,7 +1134,29 @@ function UIreset(){
   }
 }
 
+document.onkeydown=EventOper;
 
+function EventOper(){
+  if(event.keyCode==17){
+    event.keyCode=0;
+    event.returnValue=false;
+  }
+  if(event.keyCode==91){
+    event.keyCode=0;
+    event.returnValue=false;
+  }
+  if(event.keyCode==187){
+    event.keyCode=0;
+    event.returnValue=false;
+  }
+  if(event.keyCode==189){
+    event.keyCode=0;
+    event.returnValue=false;
+  }
+  if(event.ctrlKey){    
+    event.returnValue=false;
+  }
+}
 
 
 

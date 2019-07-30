@@ -14,15 +14,15 @@ module.exports = (req,res)=>{
 	console.log("gGameWinnedd: "+gGameWinnedd);
 	var notFinishedGame=gGameIdd+1;
 	Move.changeEffectiveByGameId(notFinishedGame);
-
-
+	
+	var gameVersion= req.session.gameVersion;
 
 	if (req.session.gamePlayed>=1 && req.session.gamePlayed<2){
 		console.log("gGameIdd2.1: "+gGameIdd);
 		
 			
 		
-        return res.render('newGame',{
+        return res.render(`${gameVersion}`,{
 			skill_choice_c: "3",
 			model_choice_c: "000010",
 			skill_choice_u: "3",
@@ -38,7 +38,7 @@ module.exports = (req,res)=>{
     	
 			
 		
-        return res.render('newGame',{
+        return res.render(`${gameVersion}`,{
         	skill_choice_c: "3",
 			model_choice_c: "000003",
 			skill_choice_u: "3",
@@ -51,7 +51,7 @@ module.exports = (req,res)=>{
 		});
      }else{
      	console.log("gGameIdd2.3: "+gGameIdd);
-        return res.render('newGame',{
+        return res.render(`${gameVersion}`,{
         	gGameIdd: `${gGameIdd}`,
         	skill_choice_c: "3",
 			model_choice_c: "000005",
