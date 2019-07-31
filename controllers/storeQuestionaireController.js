@@ -20,13 +20,24 @@ module.exports = (req, res) => {
     var trust2 = req.body.trust2;
     var trust3 = req.body.trust3;
     var comments=req.body.comments;
+    //find user in da and complete user's information based on questionaire
     User.find({ gUserId: req.session.userId}, function (err, docs) {
 
       if (err){
       console.log("err: "+err);
       }else{
+         var somebody = docs[0]; 
+        if (somebody.returnCode){
+
+            return res.render('thankyou', {
+                returnCode: `${somebody.returnCode}`          
+                }); 
+        }
         var returnCode=(Math.random().toString(36).substring(2, 16) + Math.random().toString(36).substring(2, 16)).toUpperCase();
-      var somebody = docs[0]; 
+     
+
+
+
     console.log(JSON.stringify(somebody));
     somebody.year=year; 
     somebody.educationalBackground=educationalBackground; 
@@ -44,12 +55,14 @@ module.exports = (req, res) => {
     somebody.comments=comments;
     somebody.returnCode=returnCode;
     
-    somebody.save();
-    
-
-    return res.render('thankyou', {
-            returnCode: `${returnCode}`          
-        }); 
+    somebody.save().then(function(response){
+               
+               return res.render('thankyou', {
+                returnCode: `${returnCode}`          
+                }); 
+    }).catch(function (error){
+                console.log("somebody save error "+error);
+            });  
     }
 
     });

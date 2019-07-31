@@ -15,6 +15,7 @@ module.exports = (req,res, next)=>{
     console.log("generated random number : "+randomNum);
     console.log("final random number : "+randomNum%2);
     var gameVersion; 
+    //render different game
   if (randomNum%2==0) {
     gameVersion="newGame";
   }else{
@@ -32,7 +33,7 @@ module.exports = (req,res, next)=>{
 		gUserId++;
 		console.log("session userId assigned to: "+req.session.userId);
 
-			
+	//store user information in database
 	User.create({
   			gUserId:req.session.userId,
   			userCreationTimePoint: new Date(),

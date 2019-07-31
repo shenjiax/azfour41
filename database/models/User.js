@@ -80,6 +80,7 @@ const UserSchema = new mongoose.Schema({
   },
 })
 
+//update user information after every game
 UserSchema.statics.changeGamePlayedByUserId = function(gUserId, gOutcome){
   console.log("UserSchema.statics.changeGamePlayedByUserId in!");
 	console.log("gUserId: "+gUserId); 

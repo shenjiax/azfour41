@@ -1,4 +1,4 @@
-
+//render consent form
 
 module.exports = (req,res)=>{
 

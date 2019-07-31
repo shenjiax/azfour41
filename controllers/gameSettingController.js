@@ -1,4 +1,4 @@
-
+//to render game setting page(deprecated)
 var gUserId=1; 
 
 module.exports = (req,res)=>{
